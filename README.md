@@ -1,4 +1,5 @@
 # Temply
+[![Build Status](https://travis-ci.org/mefernandez/temply.svg?branch=issue-1)](https://travis-ci.org/mefernandez/temply)
 
 A template-first, lightning-fast Content Management System (CMS)
 
