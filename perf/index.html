@@ -14,16 +14,39 @@
           .done(function(data){
             
             console.log('data');
+
+            var labels = _.map(data, function(stats) { 
+              return new Date(stats.start);
+            });
             var avgResponseTime = ['avgResponseTime'].concat(
-              _.map(data, function(stats){ 
+              _.map(data, function(stats) { 
                 return stats.avg; 
               })
             );
+            var minResponseTime = ['minResponseTime'].concat(
+              _.map(data, function(stats) { 
+                return stats.min; 
+              })
+            );
+            var maxResponseTime = ['maxResponseTime'].concat(
+              _.map(data, function(stats) { 
+                return stats.max; 
+              })
+            );
+            
             var chart = c3.generate({
                 data: {
                     columns: [
-                        avgResponseTime
+                      avgResponseTime,
+                      minResponseTime,
+                      maxResponseTime
                     ]
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: labels
+                    }
                 }
             });
           });
