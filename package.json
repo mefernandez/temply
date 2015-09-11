@@ -5,10 +5,11 @@
   "private": true,
   "main": "app.js",
   "scripts": {
+    "preinstall": "npm install -g bower gulp",
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "gulp perf"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "management",
     "system"
   ],
-  "author": "mefernandez@gmail.com",
+  "author": "mariano.fernandez@gmail.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mefernandez/temply/issues"
@@ -34,5 +35,11 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-shell": "^0.4.3",
+    "http-perf": "0.0.5",
+    "yargs": "^3.24.0"
   }
 }

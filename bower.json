@@ -1,0 +1,29 @@
+{
+  "name": "temply",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mefernandez/temply",
+  "authors": [
+    "mefernandez <mariano.fernandez@gmail.com>"
+  ],
+  "description": "A template-first, lightning fast CMS",
+  "main": "main.js",
+  "keywords": [
+    "cms",
+    "content",
+    "management",
+    "system"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "c3": "~0.4.10",
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3"
+  }
+}

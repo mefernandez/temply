@@ -19,7 +19,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use('template', express.static(path.join(__dirname, 'template')));
+app.use('/template', express.static(path.join(__dirname, 'template')));
+app.use('/perf', express.static(path.join(__dirname, 'perf')));
+app.use('/vendor', express.static(path.join(__dirname, 'bower_components')));
 
 app.use('/', routes);
 
