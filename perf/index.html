@@ -8,53 +8,14 @@
     <script src="/vendor/c3/c3.min.js"></script>
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/underscore/underscore-min.js"></script>
-    <script>
-      $(function() {
-        $.getJSON('/perf/data.json')
-          .done(function(data){
-            
-            console.log('data');
-
-            var labels = _.map(data, function(stats) { 
-              return new Date(stats.start);
-            });
-            var avgResponseTime = ['avgResponseTime'].concat(
-              _.map(data, function(stats) { 
-                return stats.avg; 
-              })
-            );
-            var minResponseTime = ['minResponseTime'].concat(
-              _.map(data, function(stats) { 
-                return stats.min; 
-              })
-            );
-            var maxResponseTime = ['maxResponseTime'].concat(
-              _.map(data, function(stats) { 
-                return stats.max; 
-              })
-            );
-            
-            var chart = c3.generate({
-                data: {
-                    columns: [
-                      avgResponseTime,
-                      minResponseTime,
-                      maxResponseTime
-                    ]
-                },
-                axis: {
-                    x: {
-                        type: 'category',
-                        categories: labels
-                    }
-                }
-            });
-          });
-        });
-    </script>
+    <script src="/perf/js/main.js"></script>
   </head>
   <body>
-    <div id="chart"></div>
+    <h1>Performance</h1>
+    <h2>This page</h2>
+    <div id="perf"></div>
+    <h2>Home page</h2>
+    <div id="home"></div>
 
   </body>
 </html>

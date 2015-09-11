@@ -38,6 +38,7 @@
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-shell": "^0.4.3",
-    "http-perf": "0.0.5"
+    "http-perf": "0.0.5",
+    "yargs": "^3.24.0"
   }
 }
