@@ -24,3 +24,20 @@ Acquiring a ready-to-go, professsionaly designed template is a wise move. It wil
 There are many good sites devoted to templates, notably [Theme Forest](http://themeforest.net/).
 
 Pick one, and let Temply breathe life into it.
+
+## Getting started
+
+
+:children_crossing: *Work in progress*
+
+## See it live
+
+Go to Temply's live demo and see it in action.
+Don't forget to check out Temply's performance page.
+
+:children_crossing: *Work in progress*
+
+## Get involved!
+
+Fork this repo. Create pull requests. Open new issues. Contact me.
+You are welcome.
