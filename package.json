@@ -5,6 +5,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
+    "preinstall": "npm install -g bower gulp",
     "postinstall": "bower install",
     "prestart": "npm install",
     "start": "node ./bin/www",
