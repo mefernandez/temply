@@ -22,6 +22,7 @@
     "tests"
   ],
   "dependencies": {
+    "bootstrap": "~3.3.5",
     "c3": "~0.4.10",
     "jquery": "~2.1.4",
     "underscore": "~1.8.3"
