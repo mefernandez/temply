@@ -67,5 +67,6 @@ app.use(function(err, req, res, next) {
   res.send(err.message);
 });
 
+app.use(require('connect-livereload')());
 
 module.exports = app;

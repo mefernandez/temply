@@ -2,6 +2,17 @@ var gulp = require('gulp');
 var shell = require('gulp-shell');
 var argv = require('yargs').argv;
 
+var server = require('gulp-express');
+ 
+gulp.task('server', function () {
+    // Start the server at the beginning of the task 
+    server.run(['bin/www']);
+ 
+    // Restart the server when file changes 
+    gulp.watch(['template/**/*.html'], server.notify); 
+    gulp.watch(['app.js', 'routes/**/*.js', 'modules/**/*.js'], [server.run]);
+});
+
 gulp.task('perf', function () {
 	var url = argv.u || 'http://localhost:3000';
 	var out = argv.o || 'perf/data/default.json';
