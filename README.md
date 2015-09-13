@@ -25,17 +25,27 @@ There are many good sites devoted to templates, notably [Theme Forest](http://th
 
 Pick one, and let Temply breathe life into it.
 
-## Getting started
+## Getting started
 
+As simple as:
 
-:children_crossing: *Work in progress*
+1. [Download](https://github.com/mefernandez/temply/archive/master.zip) latest and unzip it.
+2. Install [Node.js](https://nodejs.org/)
+3. Exec `npm start`
+4. Open http://localhost:3000/template
+
+You'll see Temply's landing page.
+To build a web site on your own do this:
+
+1. Download a template (HTML+JS+CSS) to `template` folder. [Theme Forest](http://themeforest.net/) is a great place to look for inspiration.
+2. Open http://localhost:3000/template to make sure your template looks Ok.
+3. Start adding plugins!
+
 
 ## See it live
 
-Go to Temply's live demo and see it in action.
-Don't forget to check out Temply's performance page.
-
-:children_crossing: *Work in progress*
+Go to [Temply's live demo](https://temply.herokuapp.com/template/) and see it in action.
+Don't forget to check out [Temply's performance page](https://temply.herokuapp.com/perf/).
 
 ## Get involved!
 
