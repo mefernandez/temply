@@ -1,0 +1,28 @@
+{
+  "name": "temply-core",
+  "version": "0.0.1",
+  "description": "Temply's HTML template engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mefernandez/temply.git"
+  },
+  "keywords": [
+    "temply",
+    "template",
+    "engine"
+  ],
+  "author": "mariano.fernandez@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mefernandez/temply/issues"
+  },
+  "homepage": "https://github.com/mefernandez/temply",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2"
+  }
+}
