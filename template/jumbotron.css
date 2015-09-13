@@ -3,3 +3,9 @@ body {
   padding-top: 50px;
   padding-bottom: 20px;
 }
+.king-icon {
+  background-image: url(images/crown37.png);
+  background-repeat: no-repeat;
+  background-position-y: -12px;
+  background-size: 20px;
+}
