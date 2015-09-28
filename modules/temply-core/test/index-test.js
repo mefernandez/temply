@@ -1,8 +1,10 @@
 var expect = require('chai').expect;
 var path = require('path');
-var temply = require('../index');
+var templyFactory = require('../index');
 
 describe('Temply', function() {
+
+  var temply = templyFactory();
 
   it('should export a render function', function() {
     expect(temply.render).to.be.a('function');
