@@ -2,7 +2,7 @@
   "name": "temply-core",
   "version": "0.0.1",
   "description": "Temply's HTML template engine",
-  "main": "index.js",
+  "main": "temply-core.js",
   "scripts": {
     "test": "mocha"
   },

@@ -19,8 +19,8 @@ describe('The plugin engine builds an execution model', function() {
       children: [
         {
           name: 'cms-render-rss-article',
-          plugin: {},
-          element: {}
+          plugin: {/* The plugin instance */},
+          element: { /* The HTML element */ }
         },
         {
           name: 'cms-render-rss-article',
@@ -34,7 +34,7 @@ describe('The plugin engine builds an execution model', function() {
   describe('from template-02.html with 1 cms-data and 2 cms-render plugins', function() {
     var filePath = path.join(__dirname, 'template-02.html');
     var html = fs.readFileSync(filePath, readFileOptions);
-    var pluginsRepository = path.join(__dirname, 'plugins/data');
+    var pluginsRepository = [path.join(__dirname, 'plugins/data'), path.join(__dirname, 'plugins/render')];
     var engine = engineFactory(pluginsRepository);
     var model = engine.build(html);
 
@@ -50,10 +50,24 @@ describe('The plugin engine builds an execution model', function() {
     it('should have 2 children', function() {
       expect(model[0].children).to.have.length(2);
     });
-    it('should have cms-render-rss-article as the first children', function() {
+    it('should have cms-render-rss-article as the 1st child', function() {
       expect(model[0].children[0].name).to.equal('cms-render-rss-feed-article');
     });
-
+    it('should have a reference to the render plugin HTML element as the 1st child', function() {
+      expect(model[0].children[0].element.attr('id')).to.equal('p-1');
+    });
+    it('should have a reference to the render plugin instance as the 1st child', function() {
+      expect(model[0].children[0].plugin).to.equal(require('./plugins/render/cms-render-rss-feed-article'));
+    });
+    it('should have cms-render-rss-article as the 2nd child', function() {
+      expect(model[0].children[1].name).to.equal('cms-render-rss-feed-article');
+    });
+    it('should have a reference to the render plugin HTML element as the 2nd child', function() {
+      expect(model[0].children[1].element.attr('id')).to.equal('p-2');
+    });
+    it('should have a reference to the render plugin instance as the 2nd child', function() {
+      expect(model[0].children[1].plugin).to.equal(require('./plugins/render/cms-render-rss-feed-article'));
+    });
   });
 
 });

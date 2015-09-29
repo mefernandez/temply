@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var path = require('path');
-var templyFactory = require('../index');
+var templyFactory = require('../temply-core');
 
 describe('Temply', function() {
 
