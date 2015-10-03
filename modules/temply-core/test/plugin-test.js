@@ -13,25 +13,44 @@ describe('A plugin', function() {
 
   describe('of type data', function() {
 
-    var filePath = path.join(__dirname, 'template-04.html');
-    var html = fs.readFileSync(filePath, readFileOptions);
-    var pluginsRepository = [path.join(__dirname, 'plugins/dummy')];
-    var engine = engineFactory(pluginsRepository);
-
     it('should take a callback and call it', function(done) {
       var plugin = require('./plugins/proto/cms-data-plugin');
-      plugin(function() {
+      plugin(null, null, function() {
         done();
       });
     });
 
-    it('should take a callback and call it passing some data', function(done) {
+    it('should take no data and a callback and call it passing some data', function(done) {
       var plugin = require('./plugins/proto/cms-data-plugin');
-      plugin(function(data) {
+      plugin(null, null, function(data) {
         expect(data).to.be.ok;
         done();
       });
     });
+
+    it('should take some data and pass it to the callback', function(done) {
+      var plugin = require('./plugins/proto/cms-data-plugin');
+      var pluginData = [];
+      plugin(pluginData, null, function(data) {
+        expect(data).to.equal(pluginData);
+        done();
+      });
+    });
+
+    it('should chain two plugin calls adding two item to data array', function(done) {
+      var plugin = require('./plugins/proto/cms-data-plugin');
+      plugin([], null, function(data) {
+        plugin(data, null, function(data) {
+          expect(data).to.have.length(2);
+          done();          
+        });
+      });
+    });
+
+  });
+
+  describe('of type render', function() {
+    // TODO
   });
 
 });

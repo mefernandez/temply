@@ -43,7 +43,7 @@ module.exports = function (pluginsRepository) {
     var elements = $('[class*="cms-"]');
     var loader = loaderFactory(pluginsRepository);
 
-    var model = _.chain(elements)
+    var plugins = _.chain(elements)
       .map(function(el) {
         var $el = $(el);
         var clazz = $el.attr('class');
@@ -58,9 +58,9 @@ module.exports = function (pluginsRepository) {
             var modelItem = {
               plugin: {
                 name: plugin,
-                instance: loader.loadPlugin(plugin)
-              },
-              $element: null,//$el
+                instance: loader.loadPlugin(plugin),
+                $element: $el
+              }
             };
             return modelItem;
           })
@@ -68,18 +68,26 @@ module.exports = function (pluginsRepository) {
         return modelItems;
       })
       .flatten()
-      .value();    
+      .value();
+    var model = {
+      $html: $,
+      plugins: plugins
+    }   
     return model;
   }
 
   // Build an execution model for the HTML passed as an argument
-  function render(model) {
-    var $ = cheerio.load(model.html);
-    var dataPluginElements = model.plugins;
-    return model;
+  function render(model, callback) {
+    var k = model.plugins.length;
+    model.plugins[0].plugin.instance([], null, function(data) {
+      model.plugins[1].plugin.instance(data, model.plugins[1].plugin.$element, function() {
+        callback(model.$html.html());
+      });
+    });
   }
 
   return {
-    build: build
+    build: build,
+    render: render
   }
 }
