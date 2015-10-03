@@ -3,7 +3,7 @@
 var cheerio = require('cheerio');
 var _ = require('lodash');
 var fs = require('fs');
-var loader = require('./plugin-loader');
+var loaderFactory = require('./plugin-loader');
 
 module.exports = function (pluginsRepository) {
 
@@ -23,7 +23,7 @@ module.exports = function (pluginsRepository) {
     var $element = this.$(element);
     modelItem.name = findDataPluginName($element);
     modelItem.element = $element;
-    modelItem.plugin = loader(pluginsRepository).loadPlugin(modelItem.name);
+    modelItem.plugin = loaderFactory(pluginsRepository).loadPlugin(modelItem.name);
     return modelItem;
   }
 
@@ -40,13 +40,35 @@ module.exports = function (pluginsRepository) {
   // Build an execution model for the HTML passed as an argument
   function build(html) {
     var $ = cheerio.load(html);
-    var dataPluginElements = $('[class*="cms-data"]');
-    var model = {html: html};
-    var plugins = _.chain(dataPluginElements)
-      .map(transformElementToModel, {$: $})
-      .map(findRenderPluginChildren, {$: $})
-      .value();
-    model.plugins = plugins;
+    var elements = $('[class*="cms-"]');
+    var loader = loaderFactory(pluginsRepository);
+
+    var model = _.chain(elements)
+      .map(function(el) {
+        var $el = $(el);
+        var clazz = $el.attr('class');
+        var plugins = clazz.split(' ');
+
+        var modelItems = _.chain(plugins)
+          .filter(function(plugin) {
+            var matches = plugin.match(/cms-(?:data|render)-(?:\w-?)+/);
+            return !!matches;
+          })
+          .map(function(plugin) {
+            var modelItem = {
+              plugin: {
+                name: plugin,
+                instance: loader.loadPlugin(plugin)
+              },
+              $element: null,//$el
+            };
+            return modelItem;
+          })
+          .value();
+        return modelItems;
+      })
+      .flatten()
+      .value();    
     return model;
   }
 
