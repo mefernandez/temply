@@ -41,10 +41,19 @@ module.exports = function (pluginsRepository) {
   function build(html) {
     var $ = cheerio.load(html);
     var dataPluginElements = $('[class*="cms-data"]');
-    var model = _.chain(dataPluginElements)
+    var model = {html: html};
+    var plugins = _.chain(dataPluginElements)
       .map(transformElementToModel, {$: $})
       .map(findRenderPluginChildren, {$: $})
       .value();
+    model.plugins = plugins;
+    return model;
+  }
+
+  // Build an execution model for the HTML passed as an argument
+  function render(model) {
+    var $ = cheerio.load(model.html);
+    var dataPluginElements = model.plugins;
     return model;
   }
 
