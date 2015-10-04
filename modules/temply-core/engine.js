@@ -79,11 +79,27 @@ module.exports = function (pluginsRepository) {
   // Build an execution model for the HTML passed as an argument
   function render(model, callback) {
     var k = model.plugins.length;
+    function series(data, index) {
+      if (index < k) {
+        var plugin = model.plugins[index].plugin.instance;
+        var $element = model.plugins[index].plugin.$element;
+        plugin(data, $element, function(data) {
+          var next = index + 1;
+          series(data, next);
+        });
+      } else {
+        callback(model.$html.html());
+      }
+
+    }
+    series([], 0);
+    /*
     model.plugins[0].plugin.instance([], null, function(data) {
       model.plugins[1].plugin.instance(data, model.plugins[1].plugin.$element, function() {
         callback(model.$html.html());
       });
     });
+    */
   }
 
   return {

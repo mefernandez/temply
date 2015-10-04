@@ -79,5 +79,22 @@ describe('The plugin engine', function() {
 
   });
 
+  describe('given an execution model built from template-07.html', function() {
+    var filePath = path.join(__dirname, 'template-07.html');
+    var html = fs.readFileSync(filePath, readFileOptions);
+    var pluginsRepository = [path.join(__dirname, 'plugins/data'), path.join(__dirname, 'plugins/render')];
+    var engine = engineFactory(pluginsRepository);
+
+    it('should call all plugins and render a result', function(done) {
+      var model = engine.build(html);
+      engine.render(model, function(html) {
+        var expected = fs.readFileSync(path.join(__dirname, 'template-07-result.html'), readFileOptions);
+        expect(html).to.equal(expected);
+        done();
+      });
+    });
+
+  });
+
 });
 
