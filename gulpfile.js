@@ -4,7 +4,7 @@ var argv = require('yargs').argv;
 
 var server = require('gulp-express');
  
-gulp.task('server', function () {
+gulp.task('default', function () {
     // Start the server at the beginning of the task 
     server.run(['bin/www']);
  
