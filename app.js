@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var temply = require('temply-express');
+var templyEngineFactory = require('temply-express');
 
 var routes = require('./routes/index');
 
@@ -12,7 +12,10 @@ var app = express();
 
 // TODO Move this out of this file
 // http://expressjs.com/advanced/developing-template-engines.html
-app.engine('html', temply);
+var pluginsRepository = [path.join(__dirname, 'plugins/data'), path.join(__dirname, 'plugins/render')];
+
+var templyEngine = templyEngineFactory(pluginsRepository);
+app.engine('html', templyEngine);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'template'));

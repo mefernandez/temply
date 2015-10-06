@@ -2,7 +2,7 @@
   "name": "temply-express",
   "version": "0.0.1",
   "description": "Temply's HTML template engine for Express.js",
-  "main": "index.js",
+  "main": "temply-express.js",
   "scripts": {
     "test": "mocha"
   },

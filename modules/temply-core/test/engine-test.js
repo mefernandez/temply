@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
-var engineFactory = require('../engine');
+var engineFactory = require('../temply-core');
 
 describe('The plugin engine', function() {
 
@@ -91,6 +91,19 @@ describe('The plugin engine', function() {
         var expected = fs.readFileSync(path.join(__dirname, 'template-07-result.html'), readFileOptions);
         expect(html).to.equal(expected);
         done();
+      });
+    });
+
+    it('should render the same model twice', function(done) {
+      var model = engine.build(html);
+      engine.render(model, function(html) {
+        var expected = fs.readFileSync(path.join(__dirname, 'template-07-result.html'), readFileOptions);
+        expect(html).to.equal(expected);
+        engine.render(model, function(html) {
+          var expected = fs.readFileSync(path.join(__dirname, 'template-07-result.html'), readFileOptions);
+          expect(html).to.equal(expected);
+          done();
+        });
       });
     });
 

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
-var engineFactory = require('../engine');
+var engineFactory = require('../temply-core');
 
 describe('A plugin', function() {
 
