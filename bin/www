@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
 
+
 /**
  * Get port from environment and store in Express.
  */
@@ -20,6 +21,34 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+
+// see http://socket.io/docs/#using-with-express-3/4
+
+var io = require('socket.io')(server);
+
+io.on('connection', function (socket) {
+  
+  var path = require('path');
+  var logPath = path.join(__dirname, '../temply.log');
+  var log = require('debug')('temply');
+  
+  log(logPath);
+
+  Tail = require('tail').Tail;
+
+  var tail = new Tail(logPath);
+
+  tail.on('line', function(data) {
+    require('fs').writeFileSync(path.join(__dirname, '../out.log'), data);
+    socket.emit('log', data);
+  });
+
+  tail.on('error', function(error) {
+    log('ERROR: ', error);
+  });
+
+});
 
 /**
  * Listen on provided port, on all network interfaces.
