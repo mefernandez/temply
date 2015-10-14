@@ -116,7 +116,8 @@
     <!-- Este script lo sirve el propio socket.io, no es ninguna lib JS estática -->
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect('http://localhost:3000');
+      var url = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+      var socket = io.connect(url);
       var rowTemplate = $('#logs-table > tbody > tr').first();
       $('#logs-table > tbody > tr').remove();
       socket.on('log', function (data) {
