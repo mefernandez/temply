@@ -5,9 +5,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "node ./bin/www",
-    "test": "gulp perf"
+    "start": "DEBUG=temply:* node bin/www 2> temply.log"
   },
   "repository": {
     "type": "git",
