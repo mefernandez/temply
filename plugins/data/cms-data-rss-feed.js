@@ -3,6 +3,7 @@
 var request = require('superagent');
 var parseString = require('xml2js').parseString;
 var _ = require('lodash');
+var log = require('debug')('temply:cms-data-rss-feed');
 
 /**
  * Get A List Apart's latest articles
@@ -16,7 +17,7 @@ module.exports = function(data, $element, callback) {
     .set('Accept', 'text/xml; charset=UTF-8')
     .end(function(err, res) {
       if (err) throw new Error(err);
-      //console.log('res.text: ' + res.text);
+      log('Reading feed from URL: ' + url);
       var xml = res.text;
       parseString(xml, function (err, result) {
         var articles = _.chain(result.rss.channel[0].item)
@@ -30,7 +31,6 @@ module.exports = function(data, $element, callback) {
             };
           })
           .value();
-        //console.log(JSON.stringify(result));
         callback(articles);
       });
     });

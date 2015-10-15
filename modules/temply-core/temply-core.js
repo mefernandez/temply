@@ -111,8 +111,8 @@ module.exports = function (pluginsRepository) {
           series(data, next);
         });
       } else {
-        
-        callback(model.$html.html());
+        var render = model.$html.html();
+        callback(render);
       }
     }
     series([], 0);
