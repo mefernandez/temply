@@ -52,6 +52,7 @@
     "gulp-live-server": "0.0.28",
     "gulp-shell": "^0.4.3",
     "http-perf": "0.0.5",
+    "supertest": "^1.1.0",
     "yargs": "^3.24.0"
   }
 }
