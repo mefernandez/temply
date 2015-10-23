@@ -20,7 +20,9 @@ module.exports = function(pluginsRepository) {
     
     //
     temply.render(model, function(html) {
-      
+      if (options && options.showTemplateFilePath) {
+        html = html.replace('<head>', '<head>\n<meta name="temply-template-path" content="' + filePath + '">');
+      }
       callback(null, html);
     });
   }

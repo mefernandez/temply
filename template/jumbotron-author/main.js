@@ -7,9 +7,11 @@ $(document).ready(function() {
     var $target = $(element);
     var id = $target.attr('id');
     var text = $target.text();
+    var template = $('meta[name=temply-template-path]').attr('content');
     var change = {
       id: id,
-      text: text
+      text: text,
+      template: template
     };
     $.post('/api/edit', change, null, 'json');
   })
