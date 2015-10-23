@@ -10,7 +10,7 @@ router.get('/control', function(req, res, next) {
 });
 
 router.get('/author', function(req, res, next) {
-  res.render('jumbotron/index.html');
+  res.render('jumbotron-author/index.html');
 });
 
 module.exports = router;

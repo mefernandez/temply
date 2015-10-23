@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/template/images/favicon.png">
+
+    <title>Temply CMS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/template/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/vendor/bootstrap-tour/build/css/bootstrap-tour.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/template/jumbotron-author/jumbotron.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/template/assets/js/ie-emulation-modes-warning.js"></script>
+
+     <!-- Important Owl stylesheet -->
+    <link rel="stylesheet" href="/template/jumbotron-author/owl-carousel/owl.carousel.css">
+     
+    <!-- Default Theme -->
+    <link rel="stylesheet" href="/template/jumbotron-author/owl-carousel/owl.theme.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+ 
+ </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Temply</a>
+          <a class="navbar-brand" href="/control">Control Panel</a>
+          <a class="navbar-brand" href="/author">Edit Content</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <a class="btn btn-primary" id="help">Help</a>
+            <button type="submit" class="btn btn-success" id="save-changes">Save Changes</button>
+          </form>
+        </div>
+        <!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <div id="main-title" style="max-width: 100px"></div>
+        <h1 contentEditable="true">Temply</h1>
+        <p>A template-first, lightning fast CMS.</p>
+        <p><a class="btn btn-primary btn-lg" href="https://github.com/mefernandez/temply" role="button">View Docs &raquo;</a></p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <section id="temply-features" class="row">
+        <div class="col-md-4">
+          <h2>Template is king</h2>
+          <p>Pick a template that's best for you and let Temply make it come alive.</p>
+          <p><a class="btn btn-default" href="https://github.com/mefernandez/temply#start-with-a-template" role="button">See how &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Authors friendly</h2>
+          <p>Create new content right off live web site.</p>
+          <p><a class="btn btn-default" href="#" role="button">Edit content &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Developers welcome</h2>
+          <p>Extend Temply in every way you need by adding new plugins or adapting its source code. Temply is runs on top of <a href="https://nodejs.org/">Node.js</a> and <a href="http://expressjs.com/">Express.js</a>.</p>
+          <p><a class="btn btn-default" href="https://github.com/mefernandez/temply" role="button">Fork the repo &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Plugins oriented</h2>
+          <p>Plugins add a small piece of functionality to your web site. Temply comes bundled with many plugins ready to go. If you don't find a suitable plugin, writing one on your own is piece of cake!</p>
+          <p><a class="btn btn-default" href="#" role="button">View plugins &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Fast and furious</h2>
+          <p>Performance is built into the framework from the very beginning. Temply responses are constantly checked to be within a performance budget.</p>
+          <p><a class="btn btn-default" href="https://developers.google.com/speed/pagespeed/" role="button">Check performance &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>SEO ready</h2>
+          <p>SEO is actually at the core of Temply. Content is served as plain HTML to web robots.</p>
+          <p><a class="btn btn-default" href="view-source:http://temply.github.io" role="button">View this page source &raquo;</a></p>
+        </div>
+      </section>
+
+      <hr>
+
+      <section id="rss-live-demo" class="row">
+        <div class="col-md-6">
+          <h2>RSS Plugin</h2>
+          <p>This content is served live from <a href="http://feeds.feedburner.com/alistapart/main">A List Apart RSS feed</a></p>
+          <div id="ala-carousel" class="owl-carousel cms-data-rss-feed">
+            <article class="cms-render-rss-feed">
+              <a href="#"><h4>Article's title</h4></a>
+              <p>Article's content, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta totam nemo explicabo asperiores officiis cupiditate dolorem, quibusdam iste dolorum quaerat delectus architecto et eos! Porro omnis ad molestiae blanditiis.</p>
+            </article>
+            <article class="cms-render-rss-feed">
+              <a href="#"><h4>Article's title</h4></a>
+              <p>Article's content, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta totam nemo explicabo asperiores officiis cupiditate dolorem, quibusdam iste dolorum quaerat delectus architecto et eos! Porro omnis ad molestiae blanditiis.</p>
+            </article>
+            <article class="cms-render-rss-feed">
+              <a href="#"><h4>Article's title</h4></a>
+              <p>Article's content, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt dicta totam nemo explicabo asperiores officiis cupiditate dolorem, quibusdam iste dolorum quaerat delectus architecto et eos! Porro omnis ad molestiae blanditiis.</p>
+            </article>
+          </div>
+        </div>        
+      </section>
+
+      <hr>
+
+      <footer>
+        <p>
+          Contact @eloy_iv. <a href="https://raw.githubusercontent.com/mefernandez/temply/master/LICENSE">MIT Licence.</a>
+          This page is gratefully based on <a href="http://getbootstrap.com/examples/jumbotron/">Bootstrap's Jumbotron example</a>.
+        </p>
+        <!--
+        <div>Crown icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+        -->
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/template/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/template/assets/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Include js plugin -->
+    <script src="/template/jumbotron-author/owl-carousel/owl.carousel.js"></script>    
+    <script src="/template/jumbotron-author/main.js"></script>
+    <script src="/template/jumbotron-author/ga.js"></script>
+  </body>
+</html>
