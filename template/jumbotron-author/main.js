@@ -14,6 +14,11 @@ $(document).ready(function() {
   var tour = new Tour({
     steps: [
     {
+      orphan: true,
+      title: "Welcome to Author mode",
+      content: "This mode allows you to edit this page's content."
+    },
+    {
       element: "#main-title",
       placement: "top",
       title: "Edit this title",
