@@ -1,8 +1,5 @@
 'use strict';
 
-var request = require('superagent');
-var parseString = require('xml2js').parseString;
-var _ = require('lodash');
 var log = require('debug')('temply:cms-data-rss-feed');
 
 var articles = [

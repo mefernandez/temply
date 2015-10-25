@@ -20,7 +20,7 @@ module.exports = function (pluginsRepository, options) {
       return matches[matches.length-1];
     }
   }
-  
+
   function transformElementToModel(element) {
     var modelItem = {};
     var $element = this.$(element);
@@ -80,20 +80,20 @@ module.exports = function (pluginsRepository, options) {
     var model = {
       $html: $,
       plugins: plugins
-    }   
+    }
     return model;
   }
 
   // Build an execution model for the HTML passed as an argument
   function render(model, callback) {
-    
-    
+
+
     if (!model) {
       callback();
       return;
     }
 
-    
+
     if (!model.plugins) {
       if (model.$html) {
         callback(model.$html.html());
@@ -102,16 +102,16 @@ module.exports = function (pluginsRepository, options) {
       }
       return;
     }
-    
+
     var k = model.plugins.length;
-    
-    
+
+
     // see http://book.mixu.net/node/ch7.html
     function series(data, index) {
-      
+
       if (index < k) {
         var plugin = model.plugins[index].plugin.instance;
-        
+
         var $element = model.plugins[index].plugin.$element;
         if (plugin instanceof Function) {
           plugin(data, $element, function(data) {
@@ -127,7 +127,7 @@ module.exports = function (pluginsRepository, options) {
             });
           } else {
             var next = index + 1;
-            series(data, next);          
+            series(data, next);
           }
         }
       } else {

@@ -2,7 +2,8 @@ $(document).ready(function() {
 
   var my_selector_generator = new CssSelectorGenerator;
 
-  $('[contentEditable]').on('blur', function(ev) {
+  // An experiment to edit static template content
+  $('#main-title').on('blur', function(ev) {
     var element = ev.target;
     var $target = $(element);
     var id = $target.attr('id');
@@ -15,7 +16,29 @@ $(document).ready(function() {
     };
     $.post('/api/edit', change, null, 'json');
   })
- 
+
+  // An experiment to edit static template content
+  $('#save-changes').on('click', function(ev) {
+    var html = $('.cms-render-database-content').last().html();
+    $.ajax('/api/plugin/cms-render-database-content', {
+      method: 'POST',
+      accepts: 'application/json',
+      contentType: 'text/plain',
+      data: html,
+      success: saveChanges
+    });
+    //$.post('/api/plugin/cms-render-database-content', html, saveChanges, 'text/html');
+    function saveChanges(data) {
+      $.ajax('/api/plugin/cms-data-in-memory-database', {
+        method: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(data)
+      });
+      //$.post('/api/plugin/cms-data-in-memory-database', data, null, 'json');
+    }
+  })
+
   $(".owl-carousel").owlCarousel(
     {
       items : 1
@@ -25,7 +48,7 @@ $(document).ready(function() {
   $('#help').on('click', function() {
     tour.restart();
   });
- 
+
   // Instance the tour
   var tour = new Tour({
     steps: [
@@ -41,10 +64,21 @@ $(document).ready(function() {
       content: "Click on this title to edit"
     },
     {
+      element: "#editable-article",
+      placement: "left",
+      title: "Edit this article",
+      content: "Click on the title and description of this article to edit"
+    },
+    {
       element: "#save-changes",
       placement: "bottom",
       title: "Save changes",
       content: "Click on this button to save changes"
+    },
+    {
+      orphan: true,
+      title: "Reload the page",
+      content: "Hit refresh on your browser. Changes will persist."
     }
   ]});
 
@@ -52,6 +86,6 @@ $(document).ready(function() {
   tour.init();
 
   // Start the tour
-  tour.start(true);
+  tour.start();
 
 });
