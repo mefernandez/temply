@@ -3,6 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var _ = require('lodash');
 var engineFactory = require('../temply-core');
+var log = require('debug')('engine-test');
 
 describe('The plugin engine', function() {
 
@@ -10,6 +11,54 @@ describe('The plugin engine', function() {
     encoding: 'utf8',
     flag: 'r'
   }
+
+  it('should skip plugins not found', function(done) {
+    var filePath = path.join(__dirname, 'template-08.html');
+    var html = fs.readFileSync(filePath, readFileOptions);
+    var pluginsRepository = [path.join(__dirname, 'plugins/data'), path.join(__dirname, 'plugins/render')];
+    var engine = engineFactory(pluginsRepository);
+    var model = engine.build(html);
+    expect(model.plugins).to.have.length(1);
+    done();
+  });
+
+  it('should render a model which contains cms-data and cms-render plugins which export extract and save functions', function(done) {
+    var engine = engineFactory();
+    var savedContent = '';
+    var model = {
+      $html: {
+        html: function() {
+          return 'HTML';
+        }
+      },
+      plugins: [
+        {
+          plugin: {
+            instance: require('./plugins/data/cms-data-load-save'),
+            $element: {
+              text: function(content) {
+                savedContent = content;
+              }
+            }
+          }
+        },
+        {
+          plugin: {
+            instance: require('./plugins/render/cms-render-extract'),
+            $element: {
+              text: function(content) {
+                savedContent = content;
+              }
+            }
+          }
+        }
+      ]
+    };
+    engine.render(model, function(render) {
+      expect(savedContent).to.equal('Lorem ipsum dolor sit amet');
+      done();
+    })
+  });
 
   describe('should build an execution model from template-04.html', function() {
 
@@ -52,7 +101,10 @@ describe('The plugin engine', function() {
     var filePath = path.join(__dirname, 'template-05.html');
     var html = fs.readFileSync(filePath, readFileOptions);
     var pluginsRepository = [path.join(__dirname, 'plugins/data'), path.join(__dirname, 'plugins/render')];
-    var engine = engineFactory(pluginsRepository);
+    var options = {
+      filterUnknownPlugins: false
+    };
+    var engine = engineFactory(pluginsRepository, options);
 
     it('which filters out non-plugin class values', function() {
       var model = engine.build(html);

@@ -16,7 +16,7 @@ $(document).ready(function() {
     $.post('/api/edit', change, null, 'json');
   })
  
-  $("#ala-carousel").owlCarousel(
+  $(".owl-carousel").owlCarousel(
     {
       items : 1
   }

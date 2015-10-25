@@ -5,8 +5,11 @@ var _ = require('lodash');
 var fs = require('fs');
 var loaderFactory = require('./plugin-loader');
 
-module.exports = function (pluginsRepository) {
+module.exports = function (pluginsRepository, options) {
 
+  var options = options || {
+    filterUnknownPlugins: true
+  };
 
   var pluginsRepository = pluginsRepository ? (pluginsRepository instanceof Array ? pluginsRepository : [pluginsRepository]) : [];
 
@@ -48,7 +51,6 @@ module.exports = function (pluginsRepository) {
         var $el = $(el);
         var clazz = $el.attr('class');
         var plugins = clazz.split(' ');
-
         var modelItems = _.chain(plugins)
           .filter(function(plugin) {
             var matches = plugin.match(/cms-(?:data|render)-(?:\w-?)+/);
@@ -63,6 +65,12 @@ module.exports = function (pluginsRepository) {
               }
             };
             return modelItem;
+          })
+          .filter(function(modelItem) {
+            if (!options.filterUnknownPlugins) {
+              return true;
+            }
+            return !!modelItem.plugin.instance;
           })
           .value();
         return modelItems;
@@ -105,11 +113,23 @@ module.exports = function (pluginsRepository) {
         var plugin = model.plugins[index].plugin.instance;
         
         var $element = model.plugins[index].plugin.$element;
-        
-        plugin(data, $element, function(data) {
-          var next = index + 1;
-          series(data, next);
-        });
+        if (plugin instanceof Function) {
+          plugin(data, $element, function(data) {
+            var next = index + 1;
+            series(data, next);
+          });
+        } else {
+          var func = plugin.load || plugin.render;
+          if (func) {
+            func(data, $element, function(data) {
+              var next = index + 1;
+              series(data, next);
+            });
+          } else {
+            var next = index + 1;
+            series(data, next);          
+          }
+        }
       } else {
         var render = model.$html.html();
         callback(render);
@@ -119,6 +139,7 @@ module.exports = function (pluginsRepository) {
   }
 
   return {
+    options: options,
     build: build,
     render: render
   }
