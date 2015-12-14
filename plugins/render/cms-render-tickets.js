@@ -1,23 +1,14 @@
 'use strict';
 
-var log = require('debug')('temply:cms-render-tickets');
-
 module.exports = function(data, $element, callback) {
   if (!data) {
     callback();
     return;
   }
-  
-  var tickets = data.contents;
-  log(JSON.stringify(tickets));
-  
 
-  tickets.forEach(function(ticket){
-  	log(ticket);
-  	var date = new Date(ticket.dateCreated);  	
-  	$element.append('<tr class="clickable-row" data-href="/ticket/'+ticket.ticket_id+'"><td>'+date.toLocaleString()+'</td><td>'+ticket.status+'</td><td>'+ticket.worklog+'</td><td>'+ticket.customer+'</td><td>'+ticket.ticket_id+'</td><td>'+ticket.title+'</td></tr>');
-  });
-  
+  var article = data.shift();
+  $element.find('h4').text(article.title);
+  $element.find('a').attr('href', article.link);
+  $element.find('p').empty().append(article.description.substring(0, 252) + '...');
   callback(data);
-
 }
