@@ -5,7 +5,7 @@ router.get('/login', function(req, res, next) {
   res.render('dashboard/login.html');
 });
 
-router.get('/', function(req, res, next) {
+router.get('/home', function(req, res, next) {
   res.render('dashboard/tickets.html');
 });
 
