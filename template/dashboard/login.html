@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Tickets</title>
+    <title>Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/template/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,13 +29,54 @@
 
     <!-- Load c3.css -->
     <link href="/vendor/c3/c3.min.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #eee;
+      }
+
+      .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin .checkbox {
+        font-weight: normal;
+      }
+      .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+                box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+      }
+      .form-signin .form-control:focus {
+        z-index: 2;
+      }
+      .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    </style>
 
     <!-- Load d3.js and c3.js -->
     <script src="/vendor/d3/d3.min.js" charset="utf-8"></script>
     <script src="/vendor/c3/c3.min.js"></script>
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/underscore/underscore-min.js"></script>
-    <script src="/template/dashboard/main.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -47,51 +88,21 @@
     </nav>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/">Tickets <span class="sr-only">(current)</span></a></li>
-            <li><a href="/clients">Clients</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <a class="anchor" name="logs"></a>
-          <h2 class="sub-header">Logs</h2>
-          <form onSubmit="return false;" class="form-inline">
-            <input type="text" class="form-control" placeholder="Search..." onChange="filter(this.value)">
-            <a class="form-control btn btn-default" onClick="clearLogs(event);">Clear Logs</a>
-          </form>
-          <div class="table-responsive">
-            <table id="logs-table" class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Date of creation</th>
-                  <th>Status</th>
-                  <th>Work Log</th>
-                  <th>Customer</th>
-                  <th>Ticket ID</th>
-                  <th>Title</th>
-                </tr>
-              </thead>
-              <tbody class="cms-data-tickets cms-render-tickets">                
-              </tbody>
-            </table>
-            <script type="text/javascript">
-              jQuery(document).ready(function($) {
-                  $(".clickable-row").click(function() {
-                      console.log('Click');
-                      window.document.location = $(this).data("href");
-                  });
-              });
-            </script>
-            <style type="text/css">
-              .clickable-row{
-                cursor: pointer;
-              }
-            </style>
-          </div>          
-        </div>
+         <form class="form-signin">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
       </div>
-    </div>      
+    </div>        
 
 
     <!-- Bootstrap core JavaScript
