@@ -34,6 +34,8 @@
     "express.io": "^1.1.13",
     "jade": "~1.11.0",
     "lodash": "^3.10.1",
+    "mongodb": "^2.1.1",
+    "mongoose": "^4.3.1",
     "morgan": "~1.6.1",
     "node-tail": "0.0.4",
     "react": "^0.14.0",
@@ -52,6 +54,7 @@
     "gulp-live-server": "0.0.28",
     "gulp-shell": "^0.4.3",
     "http-perf": "0.0.5",
+    "mongodb-migrate": "^1.2.3",
     "supertest": "^1.1.0",
     "yargs": "^3.24.0"
   }
