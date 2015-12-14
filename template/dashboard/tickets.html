@@ -64,19 +64,30 @@
             <table id="logs-table" class="table table-striped">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Class</th>
-                  <th>Message</th>
+                  <th>Date of creation</th>
+                  <th>Status</th>
+                  <th>Work Log</th>
+                  <th>Customer</th>
+                  <th>Ticket ID</th>
+                  <th>Title</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Now</td>
-                  <td>some:logger</td>
-                  <td>Loading log messages</td>
-                </tr>
+              <tbody class="cms-data-tickets cms-render-tickets">                
               </tbody>
             </table>
+            <script type="text/javascript">
+              jQuery(document).ready(function($) {
+                  $(".clickable-row").click(function() {
+                      console.log('Click');
+                      window.document.location = $(this).data("href");
+                  });
+              });
+            </script>
+            <style type="text/css">
+              .clickable-row{
+                cursor: pointer;
+              }
+            </style>
           </div>          
         </div>
       </div>      
