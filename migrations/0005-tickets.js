@@ -3,11 +3,26 @@ var mongodb = require('mongodb');
 
 exports.up = function(db, next) {
   db.collection('tickets').insertMany([{
-    a: 1
+    "customer": "Customer",
+    "ticket_id": "CUS-1",
+    "status": "Open",
+    "title": "New Ticket 1",
+    "worklog": 1,
+    "dateCreated": "2015-12-14T12:12:47.901Z"
   }, {
-    a: 2
-  }, {
-    a: 3
+    "customer": "Customer",
+    "ticket_id": "CUS-2",
+    "status": "Open",
+    "title": "New Ticket 2",
+    "worklog": 2,
+    "dateCreated": "2015-12-14T12:12:47.901Z"
+  },{
+    "customer": "Customer",
+    "ticket_id": "CUS-3",
+    "status": "Open",
+    "title": "New Ticket 3",
+    "worklog": 3,
+    "dateCreated": "2015-12-14T12:12:47.901Z"
   }], function(err, result) {
     assert.equal(err, null);
     assert.equal(3, result.result.n);
@@ -19,6 +34,9 @@ exports.up = function(db, next) {
 };
 
 exports.down = function(db, next) {
-  db.drop('tickets');
-  next();
+  db.collection('tickets').drop(function(err, result) {
+    assert.equal(err, null);
+    console.log("Dropped collection tickets");
+    next();
+  });
 };
