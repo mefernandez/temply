@@ -1,11 +1,11 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var templyEngineFactory = require('temply-express');
-var router = express.Router();
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
@@ -31,38 +31,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //FIXME no funcionando
 //app.use(require('connect-livereload')());
 app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/template', express.static(path.join(__dirname, 'template')));
 app.use('/vendor', express.static(path.join(__dirname, 'bower_components')));
 
-
-//app.use('/app', ensureAuthenticated, require('./routes/private'));
-app.use('/', router);
-
-router.get('/', function(req, res, next) {
-  res.redirect('dashboard/login.html');
-});
-
-router.get('/login', function(req, res, next) {
-  res.render('dashboard/login.html');
-});
-
-router.post('/login',
-  passport.authenticate('local', { 
-    successRedirect: '/app/tickets',
-    failureRedirect: '/login',
-    failureFlash: true 
-  })
-);
-
-router.get('/tickets', function(req, res, next) {
-  res.render('dashboard/tickets.html');
-});
-
-router.get('/clients', function(req, res, next) {
-  res.render('dashboard/clients.html');
-});
+app.use('/app', ensureAuthenticated, require('./routes/private'));
+app.use('/', require('./routes/public'));
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -86,6 +62,22 @@ passport.use(new LocalStrategy(
   */
   }
 ));
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete LinkedIn profile is
+//   serialized and deserialized.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
