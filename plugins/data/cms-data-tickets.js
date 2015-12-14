@@ -9,8 +9,8 @@ var log = require('debug')('temply:cms-data-rss-feed');
  * Get A List Apart's latest articles
  */
 module.exports = function(data, $element, callback) {
-  var url = 'http://feeds.feedburner.com/alistapart/main';
-
+  var url = '/api/tickets';
+  log('Reading tickets from URL: ' + url);
   request
     .get(url)
     .set('User-Agent', 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)')
