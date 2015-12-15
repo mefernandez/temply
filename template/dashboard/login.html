@@ -15,7 +15,7 @@
     <link href="/template/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/template/dashboard/dashboard.css" rel="stylesheet">
+    <link href="/template/dashboard/dashboard.css" rel="stylesheet">    
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -29,6 +29,8 @@
 
     <!-- Load c3.css -->
     <link href="/vendor/c3/c3.min.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css">
+    <link href="/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
     <style type="text/css">
       body {
         padding-top: 40px;
@@ -79,6 +81,7 @@
     <script src="/vendor/underscore/underscore-min.js"></script>
   </head>
   <body>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">          
@@ -86,21 +89,29 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid">    
       <div class="row">
-         <form class="form-signin">
+         <form class="form-signin" method="post">
           <h2 class="form-signin-heading text-center">Tricket Login</h2>
-          <label for="inputEmail">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-          <label for="inputPassword">Password</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" value="remember-me"> Remember me
-            </label>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </form>
+          <a href="/auth/google" class="btn btn-block btn-social btn-google">
+            <span class="fa fa-google"></span> Sign in with Ondevio
+          </a>
+          <a data-toggle="collapse" data-target="#form" class="btn btn-block btn-social btn-github">
+            <span class="fa fa-user"></span> Sign as Client
+          </a>
+          <div id="form" class="collapse">
+            <label for="inputEmail">Email address</label>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="username" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          </div>          
+        </form>        
       </div>
     </div>        
 
