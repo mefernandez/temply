@@ -1,4 +1,5 @@
 var express = require('express');
+
 var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,8 +7,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var templyEngineFactory = require('temply-express');
+var config = require('./config/config.js')();
 var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+  , LocalStrategy = require('passport-local').Strategy, util = require('util')
+  , GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+// API Access link for creating client ID and secret:
+// https://code.google.com/apis/console/
+var GOOGLE_CLIENT_ID = '949398258429-ncn30qm3eu3gd7v4p1163sno76v9l0n2.apps.googleusercontent.com';
+var GOOGLE_CLIENT_SECRET = 'W5jXPiEcb4P1xhC8Y5V-UcdJ';
 
 
 var app = express();
@@ -40,15 +48,38 @@ app.use('/vendor', express.static(path.join(__dirname, 'bower_components')));
 app.use('/app', ensureAuthenticated, require('./routes/private'));
 app.use('/', require('./routes/public'));
 
+
+// Use the GoogleStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Google
+//   profile), and invoke a callback with a user object.
+passport.use(new GoogleStrategy({
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: config.domain+'/auth/google/callback'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // asynchronous verification, for effect...
+    process.nextTick(function () {
+      
+      // To keep the example simple, the user's Google profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Google account with a user record in your database,
+      // and return that user instead.
+      if(profile.emails[0].value.indexOf(config.company)>0){
+        return done(null, profile);
+      }
+      return done(null, false);
+    });
+  }
+));
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    //Personalizar para mongo
-
-    if (username !== ''){
-      var user = {id: 1, username: 'admin', password: 'admin'};
-      return done(null, user);
-    }
+    //TODO: Client implementatio    
+    return done(null, false);
     /*
+    var user = {id: 1, username: 'admin', password: 'admin'};
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
@@ -59,7 +90,7 @@ passport.use(new LocalStrategy(
       }
       return done(null, user);
     });
-  */
+    */
   }
 ));
 
