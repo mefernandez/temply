@@ -41,7 +41,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">          
-          <a class="navbar-brand" href="/">Tricket</a>
+          <a class="navbar-brand" href="/">Control Panel</a>
         </div>
       </div>
     </nav>
@@ -64,34 +64,22 @@
             <table id="logs-table" class="table table-striped">
               <thead>
                 <tr>
-                  <th>Date of creation</th>
-                  <th>Status</th>
-                  <th>Work Log</th>
-                  <th>Customer</th>
-                  <th>Ticket ID</th>
-                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Class</th>
+                  <th>Message</th>
                 </tr>
               </thead>
-              <tbody class="cms-data-tickets cms-render-tickets">                
+              <tbody>
+                <tr>
+                  <td>Now</td>
+                  <td>some:logger</td>
+                  <td>Loading log messages</td>
+                </tr>
               </tbody>
             </table>
-            <script type="text/javascript">
-              jQuery(document).ready(function($) {
-                  $(".clickable-row").click(function() {
-                      console.log('Click');
-                      window.document.location = $(this).data("href");
-                  });
-              });
-            </script>
-            <style type="text/css">
-              .clickable-row{
-                cursor: pointer;
-              }
-            </style>
           </div>          
         </div>
-      </div>
-    </div>      
+      </div>      
 
 
     <!-- Bootstrap core JavaScript
