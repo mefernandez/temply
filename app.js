@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var templyEngineFactory = require('temply-express');
 
+var routes = require('./routes/index');
 
 var app = express();
 
@@ -31,7 +32,7 @@ app.use('/template', express.static(path.join(__dirname, 'template')));
 app.use('/perf', express.static(path.join(__dirname, 'perf')));
 app.use('/vendor', express.static(path.join(__dirname, 'bower_components')));
 
-app.use('/', require('./routes/index'));
+app.use('/', routes);
 
 
 
